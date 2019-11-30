@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6q1m4lcd5j20oo0kxt98.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6q1qihyggj20ye0dh0tb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6q1t1iqh0j20hu06q0sq.jpg">
-<meta property="og:updated_time" content="2019-11-30T03:13:38.402Z">
+<meta property="og:updated_time" content="2019-11-30T08:39:05.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spirng实战读书笔记">
 <meta name="twitter:description" content="第一章 Spring 之旅源码运行环境搭建在idea中选中项目build.gradle文件。    导入完成后，由于gradle4.8以后不支持自定义wrapper，报如下错误  具体见： How to declare gradle version 5.0 in build.gradle? 此时，修改build.gradle文件为如下即可:  依赖注入原理：依赖注入会将所依赖的关系自动交给目标对象">
@@ -348,7 +348,10 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span>  <span class="title">CDPlayerConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>或者，使用xml启用组件扫描</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"soundsystem"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="为组件扫描的bean命名"><a href="#为组件扫描的bean命名" class="headerlink" title="为组件扫描的bean命名"></a>为组件扫描的bean命名</h3><p>在 Spring Boot 项目中使用 Swagger 文档 <a href="https://www.ibm.com/developerworks/cn/java/j-using-swagger-in-a-spring-boot-project/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-using-swagger-in-a-spring-boot-project/index.html</a></p>
+<h3 id="为组件扫描的bean命名"><a href="#为组件扫描的bean命名" class="headerlink" title="为组件扫描的bean命名"></a>为组件扫描的bean命名</h3><p><a href="https://stackoverflow.com/questions/55405441/intelij-2019-1-update-brakes-junit-tests" target="_blank" rel="noopener">macOS运行chapter02中的单元测试遇到错误及解决</a></p>
+<p>@Component 表明某个类为组建类<br>@ComponentScan 启用组件扫描，默认会扫描与配置类相同的包，或者使用xml启用组建扫描，&lt;context:component-scan base-package=”soundsystem”/&gt;</p>
+<p>为组建扫描的bean命名<br>@Component(“name”) 或者使用 @Named(“name”)</p>
+<p>设置组件扫描的基础包<br>@ComponentScan(“packageName”)<br>设置多个基础包<br>@ComponentScan(basePackages={“package1”,”package2”})<br>@ComponentScan(basePackagesClasses={class1.class,class2.class})</p>
 
       
     </div>
@@ -462,7 +465,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
