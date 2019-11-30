@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Gradle介绍Gradle 的出现弥补了 Ant 和 Maven 的不足。基于 Groovy 编程语言来声明项目设置。 Gradle 官方文档 Gradle 安装下载压缩文件，并解压。 Gradle 下载 配置环境变量。 打开环境配置，新建系统环境“GRADLE_HOME”,值为D:\soft\gradle\gradle-4.8,找到path变量，后面添加%GRADLE_HOME%\bin;。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gradle学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/09/05/Gradle学习笔记/index.html">
+<meta property="og:site_name" content="FrouFrou">
+<meta property="og:description" content="Gradle介绍Gradle 的出现弥补了 Ant 和 Maven 的不足。基于 Groovy 编程语言来声明项目设置。 Gradle 官方文档 Gradle 安装下载压缩文件，并解压。 Gradle 下载 配置环境变量。 打开环境配置，新建系统环境“GRADLE_HOME”,值为D:\soft\gradle\gradle-4.8,找到path变量，后面添加%GRADLE_HOME%\bin;。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyurhbxmj20k40hcq3z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyy5qkwjj20k40hcq3h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyy8nd6hj20k40hcwf9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oz7il1x0j209f099jrd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6ozer7od0j207b0aqq2z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6ozi1ppibj211y0lct9k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6ozrkdjm7j211y0lc0tw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pp3lxgl9j21ps1acqv5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6px9qmyn7j207h0apjrd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxebcignj20wc0ilq4h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxebgbmpj20pg0er0ts.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxp39zkzj20re0cn77t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxxze8cfj20na067juz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pyphnb3hj20vf0e20zl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pyphnt4sj20xs0hkk1t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pzjjb8pcj209i075jsj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pzkw8jxkj20yc0gtn4f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pzqxqwpwj20qs0b70w2.jpg">
+<meta property="og:updated_time" content="2019-11-30T03:13:38.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gradle学习笔记">
+<meta name="twitter:description" content="Gradle介绍Gradle 的出现弥补了 Ant 和 Maven 的不足。基于 Groovy 编程语言来声明项目设置。 Gradle 官方文档 Gradle 安装下载压缩文件，并解压。 Gradle 下载 配置环境变量。 打开环境配置，新建系统环境“GRADLE_HOME”,值为D:\soft\gradle\gradle-4.8,找到path变量，后面添加%GRADLE_HOME%\bin;。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyurhbxmj20k40hcq3z.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/05/Gradle学习笔记/">
+
+
+
+
+
+  <title>Gradle学习笔记 | FrouFrou</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-124508814-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FrouFrou</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">live and learn</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/05/Gradle学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FrouFrou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FrouFrou">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gradle学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-05T19:42:08+08:00">
+                2019-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Gradle介绍"><a href="#Gradle介绍" class="headerlink" title="Gradle介绍"></a>Gradle介绍</h2><p>Gradle 的出现弥补了 Ant 和 Maven 的不足。基于 Groovy 编程语言来声明项目设置。</p>
+<p><a href="https://docs.gradle.org/current/userguide/userguide.html" target="_blank" rel="noopener">Gradle 官方文档</a></p>
+<h3 id="Gradle-安装"><a href="#Gradle-安装" class="headerlink" title="Gradle 安装"></a>Gradle 安装</h3><p>下载压缩文件，并解压。</p>
+<p><a href="https://gradle.org/install/" target="_blank" rel="noopener">Gradle 下载</a></p>
+<p>配置环境变量。</p>
+<p>打开环境配置，新建系统环境“GRADLE_HOME”,值为D:\soft\gradle\gradle-4.8,找到path变量，后面添加%GRADLE_HOME%\bin;。</p>
+<h3 id="IDEA-中新建-Gradle-项目"><a href="#IDEA-中新建-Gradle-项目" class="headerlink" title="IDEA 中新建 Gradle 项目"></a>IDEA 中新建 Gradle 项目</h3><p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyurhbxmj20k40hcq3z.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyy5qkwjj20k40hcq3h.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oyy8nd6hj20k40hcwf9.jpg" alt></p>
+<h3 id="Gradle项目目录结构"><a href="#Gradle项目目录结构" class="headerlink" title="Gradle项目目录结构"></a>Gradle项目目录结构</h3><p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6oz7il1x0j209f099jrd.jpg" alt></p>
+<p>src/main/java 放置正式代码目录<br>src/main/resources 放置正式配置文件目录<br>src/test/java 放置单元测试代码目录<br>src/test/resources 放置单元测试配置文件目录<br>src/main/webapp 放置页面元素，如 js，css,html,jsp</p>
+<h2 id="Groovy语言"><a href="#Groovy语言" class="headerlink" title="Groovy语言"></a>Groovy语言</h2><p>使用 idea 内置的 groovy 编辑器,如果无法输入，按下 i 键(同vim编辑器相同)</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6ozer7od0j207b0aqq2z.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6ozi1ppibj211y0lct9k.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11gy1g6ozrkdjm7j211y0lc0tw.jpg" alt></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//介绍 groovy 语言</span></span><br><span class="line">println(<span class="string">"hello groovy"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义变量</span></span><br><span class="line"><span class="comment">//def是弱类型，groovy会根据情况来给变量赋予对应的类型</span></span><br><span class="line"><span class="keyword">def</span> i=<span class="number">18</span></span><br><span class="line">println i</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义集合类型</span></span><br><span class="line"><span class="keyword">def</span> list=[<span class="string">'a'</span>,<span class="string">'b'</span>]</span><br><span class="line"><span class="comment">//往list中添加元素</span></span><br><span class="line">list&lt;&lt;<span class="string">'c'</span></span><br><span class="line"><span class="comment">//取出list中第三个元素</span></span><br><span class="line">println list.get(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个map</span></span><br><span class="line"><span class="keyword">def</span> map =[<span class="string">'key1'</span>:<span class="string">'value1'</span>,<span class="string">'key2'</span>:<span class="string">'value2'</span>]</span><br><span class="line"><span class="comment">//向map中添加键值对</span></span><br><span class="line">map.key3=<span class="string">'value3'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Gradle 中的闭包</span></span><br><span class="line"><span class="comment">//什么是闭包，闭包就是一段代码块，在gradle中，主要把闭包当参数来使用</span></span><br><span class="line"><span class="comment">//定义一个闭包</span></span><br><span class="line"><span class="keyword">def</span> b1=&#123;</span><br><span class="line">    println <span class="string">"hello b1"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个方法，方法里面需要闭包类型的参数</span></span><br><span class="line"><span class="keyword">def</span> method1(Closure closure)&#123;</span><br><span class="line">    closure()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用method1</span></span><br><span class="line">method1(b1)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个带参数的闭包</span></span><br><span class="line"><span class="keyword">def</span> b2=&#123;</span><br><span class="line">    v -&gt;</span><br><span class="line">        println <span class="string">"hello $&#123;v&#125;"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> method2(Closure closure)&#123;</span><br><span class="line">    closure(<span class="string">"xiao ming"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">method(b2)</span><br></pre></td></tr></table></figure>
+<h2 id="Gradle配置文件build-gradle"><a href="#Gradle配置文件build-gradle" class="headerlink" title="Gradle配置文件build.gradle"></a>Gradle配置文件build.gradle</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">'java'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group <span class="string">'com.itheima'</span></span><br><span class="line">version <span class="string">'1.0-SNAPSHOT'</span></span><br><span class="line"></span><br><span class="line">sourceCompatibility = <span class="number">1.8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//指定所使用的仓库，mavenCentral()表示使用中央仓库，所使用的jar包都从中央仓库下载到本地仓库</span></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* gradle工程所有的jar包的坐标都在dependencies属性内放置</span></span><br><span class="line"><span class="comment">* 每一个的jar包的坐标都有三个基本元素构成</span></span><br><span class="line"><span class="comment">* group，name,version</span></span><br><span class="line"><span class="comment">* testCompile表示该jar包在测试的时候起作用，该属性为jar包的作用域</span></span><br><span class="line"><span class="comment">* 我们在gradle里面添加坐标的时候要带上jar包的作用域</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">    testCompile <span class="string">group:</span> <span class="string">'junit'</span>, <span class="string">name:</span> <span class="string">'junit'</span>, <span class="string">version:</span> <span class="string">'4.12'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>jar包坐标查找 maven 中央仓库</p>
+<p><a href="https://mvnrepository.com/" target="_blank" rel="noopener">仓库坐标查找</a></p>
+<h2 id="Gradle使用本地maven仓库"><a href="#Gradle使用本地maven仓库" class="headerlink" title="Gradle使用本地maven仓库"></a>Gradle使用本地maven仓库</h2><p>给本地maven仓库新建环境变量</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pp3lxgl9j21ps1acqv5.jpg" alt></p>
+<p>修改build.gradle文件</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories&#123;</span><br><span class="line">    <span class="comment">//先从本地仓库寻找依赖，如果没有，再从中央仓库下载</span></span><br><span class="line">    mavenLocal();</span><br><span class="line">    mavenCentral();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><p>目录结构 </p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6px9qmyn7j207h0apjrd.jpg" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountDao</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">implements</span> <span class="title">AccountDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ssss"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/aop/spring-aop.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">		http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountDaoImpl"</span> <span class="attr">class</span>=<span class="string">"com.itheima.dao.impl.AccountDaoImpl"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accountTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//得到spring容器</span></span><br><span class="line">        ApplicationContext ac=<span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">        <span class="comment">//从容器中 得到AccountDao对象</span></span><br><span class="line">        AccountDao accountDao=ac.getBean(AccountDao.class);</span><br><span class="line">        <span class="comment">//调用方法</span></span><br><span class="line">        accountDao.findAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成jar包</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxebcignj20wc0ilq4h.jpg" alt><br><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxebgbmpj20pg0er0ts.jpg" alt></p>
+<h2 id="新建web工程"><a href="#新建web工程" class="headerlink" title="新建web工程"></a>新建web工程</h2><p>在main下新建webapp文件夹，然后在build.gradle中添加apply plugin:’war’</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxp39zkzj20re0cn77t.jpg" alt></p>
+<p>导入和spring相关的jar包</p>
+<p>作用域为provided指在编译时需要的jar包，而运行时不需要</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pxxze8cfj20na067juz.jpg" alt></p>
+<p>配置组件扫描，视图解析器</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pyphnb3hj20vf0e20zl.jpg" alt></p>
+<p>配置servlet</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pyphnt4sj20xs0hkk1t.jpg" alt></p>
+<h2 id="Gradle工程拆分与聚合"><a href="#Gradle工程拆分与聚合" class="headerlink" title="Gradle工程拆分与聚合"></a>Gradle工程拆分与聚合</h2><p>在主项目下新建三个module</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pzjjb8pcj209i075jsj.jpg" alt></p>
+<p>修改主项目中的build.gradle文件</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pzkw8jxkj20yc0gtn4f.jpg" alt></p>
+<p>将子项目中build.gradle重复的内容删去，并添加上对应的依赖</p>
+<p><img src="http://ww1.sinaimg.cn/large/edd3cb11ly1g6pzqxqwpwj20qs0b70w2.jpg" alt></p>
+<p><a href="https://www.bilibili.com/video/av31574438/?p=12" target="_blank" rel="noopener">Gradle入门到精通</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/24/Spirng实战读书笔记/" rel="next" title="Spirng实战读书笔记">
+                <i class="fa fa-chevron-left"></i> Spirng实战读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/10/面试题/" rel="prev" title="面试题">
+                面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">FrouFrou</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle介绍"><span class="nav-number">1.</span> <span class="nav-text">Gradle介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle-安装"><span class="nav-number">1.1.</span> <span class="nav-text">Gradle 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA-中新建-Gradle-项目"><span class="nav-number">1.2.</span> <span class="nav-text">IDEA 中新建 Gradle 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle项目目录结构"><span class="nav-number">1.3.</span> <span class="nav-text">Gradle项目目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Groovy语言"><span class="nav-number">2.</span> <span class="nav-text">Groovy语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle配置文件build-gradle"><span class="nav-number">3.</span> <span class="nav-text">Gradle配置文件build.gradle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle使用本地maven仓库"><span class="nav-number">4.</span> <span class="nav-text">Gradle使用本地maven仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速上手"><span class="nav-number">5.</span> <span class="nav-text">快速上手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建web工程"><span class="nav-number">6.</span> <span class="nav-text">新建web工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle工程拆分与聚合"><span class="nav-number">7.</span> <span class="nav-text">Gradle工程拆分与聚合</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FrouFrou</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

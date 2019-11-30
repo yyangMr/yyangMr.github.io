@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.finallyfinally子句中包含return语句时，带资源的finally语句2.Linux export命令3.排序算法快速排序三分钟彻底理解冒泡排序十大经典排序算法最强总结 冒泡排序：思路：1.比较相邻的元素。如果第一个比第二个大，就交换它们两个；2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；3.针对所有的元素重复以上的步骤，除了最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题">
+<meta property="og:url" content="http://yoursite.com/2019/09/10/面试题/index.html">
+<meta property="og:site_name" content="FrouFrou">
+<meta property="og:description" content="1.finallyfinally子句中包含return语句时，带资源的finally语句2.Linux export命令3.排序算法快速排序三分钟彻底理解冒泡排序十大经典排序算法最强总结 冒泡排序：思路：1.比较相邻的元素。如果第一个比第二个大，就交换它们两个；2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；3.针对所有的元素重复以上的步骤，除了最">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-30T03:13:38.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试题">
+<meta name="twitter:description" content="1.finallyfinally子句中包含return语句时，带资源的finally语句2.Linux export命令3.排序算法快速排序三分钟彻底理解冒泡排序十大经典排序算法最强总结 冒泡排序：思路：1.比较相邻的元素。如果第一个比第二个大，就交换它们两个；2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；3.针对所有的元素重复以上的步骤，除了最">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/10/面试题/">
+
+
+
+
+
+  <title>面试题 | FrouFrou</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-124508814-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FrouFrou</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">live and learn</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/10/面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FrouFrou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FrouFrou">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-10T09:45:11+08:00">
+                2019-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.finally<br>finally子句中包含return语句时，带资源的finally语句<br>2.Linux export命令<br>3.排序算法<br><a href="https://blog.csdn.net/nrsc272420199/article/details/82587933" target="_blank" rel="noopener">快速排序</a><br><a href="https://www.cnblogs.com/bigdata-stone/p/10464243.html" target="_blank" rel="noopener">三分钟彻底理解冒泡排序</a><br><a href="https://www.cnblogs.com/guoyaohua/p/8600214.html" target="_blank" rel="noopener">十大经典排序算法最强总结</a></p>
+<p>冒泡排序：<br>思路：<br>1.比较相邻的元素。如果第一个比第二个大，就交换它们两个；<br>2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；<br>3.针对所有的元素重复以上的步骤，除了最后一个；<br>重复步骤1~3，直到排序完成。</p>
+<p>时间复杂度：最佳情况：T(n) = O(n)   最差情况：T(n) = O(n2)   平均情况：T(n) = O(n2)</p>
+<p>/**</p>
+<pre><code> * 冒泡排序
+ */
+public static int[] bubbleSort(int[] array) {
+    if (array.length == 0)
+        return array;
+    for (int i = 0; i &lt; array.length; i++)
+        for (int j = 0; j &lt; array.length - 1 - i; j++)
+            if (array[j + 1] &lt; array[j]) {
+                int temp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = temp;
+            }
+    return array;
+}
+</code></pre><p>选择排序：<br>思路：每一次找到当前最小的元素放到前面</p>
+<p>/**</p>
+<pre><code> * 选择排序
+ * @param array
+ * @return
+ */
+public static int[] selectionSort(int[] array) {
+    if (array.length == 0)
+        return array;
+    for (int i = 0; i &lt; array.length; i++) {
+        int minIndex = i;
+        for (int j = i; j &lt; array.length; j++) {
+            if (array[j] &lt; array[minIndex]) //找到最小的数
+                minIndex = j; //将最小数的索引保存
+        }
+        int temp = array[minIndex];
+        array[minIndex] = array[i];
+        array[i] = temp;
+    }
+    return array;
+}
+</code></pre><p>插入排序：<br>思路：<br>1.从第一个元素开始，该元素可以认为已经被排序；<br>2.取出下一个元素，在已经排序的元素序列中从后向前扫描；<br>3.如果该元素（已排序）大于新元素，将该元素移到下一位置；<br>4.重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；<br>5.将新元素插入到该位置后；<br>重复步骤2~5。</p>
+<p>/*<em>
+</em>插入排序<br>*/<br>private static int[] insertSort(int[]arr){<br>    if(arr == null || arr.length &lt; 2){<br>        return arr;<br>    }<br>    for(inti=1;i&lt;arr.length;i++){<br>        for(intj=i;j&gt;0;j–){<br>            if(arr[j]&lt;arr[j-1]){<br>            //TODO:<br>            int temp=arr[j];<br>            arr[j]=arr[j-1];<br>            arr[j-1]=temp;<br>            //<br>            }else{<br>            //接下来是无用功<br>            break;<br>            }<br>            }<br>        }<br>    return arr;<br>}</p>
+<p>快速排序：<br>思路：快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。<br>从数列中挑出一个元素，称为 “基准”（pivot）；<br>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；<br>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+<p>/**</p>
+<pre><code> * 快速排序方法
+ * @param array
+ * @param start
+ * @param end
+ * @return
+ */
+public static int[] QuickSort(int[] array, int start, int end) {
+    if (array.length &lt; 1 || start &lt; 0 || end &gt;= array.length || start &gt; end) return null;
+    int smallIndex = partition(array, start, end);
+    if (smallIndex &gt; start)
+        QuickSort(array, start, smallIndex - 1);
+    if (smallIndex &lt; end)
+        QuickSort(array, smallIndex + 1, end);
+    return array;
+}
+/**
+ * 快速排序算法——partition
+ * @param array
+ * @param start
+ * @param end
+ * @return
+ */
+public static int partition(int[] array, int start, int end) {
+    int pivot = (int) (start + Math.random() * (end - start + 1));
+    int smallIndex = start - 1;
+    swap(array, pivot, end);
+    for (int i = start; i &lt;= end; i++)
+        if (array[i] &lt;= array[end]) {
+            smallIndex++;
+            if (i &gt; smallIndex)
+                swap(array, i, smallIndex);
+        }
+    return smallIndex;
+}
+
+/**
+ * 交换数组内两个元素
+ * @param array
+ * @param i
+ * @param j
+ */
+public static void swap(int[] array, int i, int j) {
+    int temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
+</code></pre><p>4.sql中的having语句<br><a href="https://www.w3school.com.cn/sql/sql_having.asp" target="_blank" rel="noopener">SQL HAVING 子句</a><br>在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用。<br>用一条SQL语句查询出每门课都大于80分的学生姓名<br>select distinct name from aa where name not in (select distinct name from aa where fengshu&lt;=80)</p>
+<p>5.java中的基本数据类型<br><a href="https://www.runoob.com/java/java-basic-datatypes.html" target="_blank" rel="noopener">Java 基本数据类型</a><br>共八种，六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。<br>byte,short,int,long,float,double,char,boolean</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/05/Gradle学习笔记/" rel="next" title="Gradle学习笔记">
+                <i class="fa fa-chevron-left"></i> Gradle学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/30/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">FrouFrou</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FrouFrou</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
