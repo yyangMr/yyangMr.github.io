@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="检索数据1SELECT prod_name,prod_id,prod_price FROM Products SELECT * from products 检索不同的值注意：不能部分使用 DISTINCT，即 DISTINCT 会自动作用于所有的列 1select DISTINCT vend_id,prod_price FROM products 限制结果mysql 1SELECT prod_na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/12/21/SQL-学习笔记/index.html">
+<meta property="og:site_name" content="FrouFrou">
+<meta property="og:description" content="检索数据1SELECT prod_name,prod_id,prod_price FROM Products SELECT * from products 检索不同的值注意：不能部分使用 DISTINCT，即 DISTINCT 会自动作用于所有的列 1select DISTINCT vend_id,prod_price FROM products 限制结果mysql 1SELECT prod_na">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-24T09:50:56.886Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL 学习笔记">
+<meta name="twitter:description" content="检索数据1SELECT prod_name,prod_id,prod_price FROM Products SELECT * from products 检索不同的值注意：不能部分使用 DISTINCT，即 DISTINCT 会自动作用于所有的列 1select DISTINCT vend_id,prod_price FROM products 限制结果mysql 1SELECT prod_na">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/21/SQL-学习笔记/">
+
+
+
+
+
+  <title>SQL 学习笔记 | FrouFrou</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-124508814-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FrouFrou</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">live and learn</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/21/SQL-学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FrouFrou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FrouFrou">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL 学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T17:15:05+08:00">
+                2019-12-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-24T17:50:56+08:00">
+                2019-12-24
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="检索数据"><a href="#检索数据" class="headerlink" title="检索数据"></a>检索数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name,prod_id,prod_price <span class="keyword">FROM</span> Products <span class="keyword">SELECT</span> * <span class="keyword">from</span> products</span><br></pre></td></tr></table></figure>
+<h3 id="检索不同的值"><a href="#检索不同的值" class="headerlink" title="检索不同的值"></a>检索不同的值</h3><p>注意：不能部分使用 DISTINCT，即 DISTINCT 会自动作用于所有的列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">DISTINCT</span> vend_id,prod_price <span class="keyword">FROM</span> products</span><br></pre></td></tr></table></figure>
+<h3 id="限制结果"><a href="#限制结果" class="headerlink" title="限制结果"></a>限制结果</h3><p>mysql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> products <span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>第一个被检索的行是第 0 行，而不是第一行。<br>用 OFFSET 指定开始的行数，以下语句返回从第五行开始的五条数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> products <span class="keyword">limit</span> <span class="number">5</span> <span class="keyword">OFFSET</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>简化的 LIMIT OFFSET 语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> products <span class="keyword">limit</span> <span class="number">5</span> , <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>oracle</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">ROWNUM</span> &lt;= <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>SQL Server</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">5</span> prod_name <span class="keyword">from</span> products</span><br></pre></td></tr></table></figure>
+<h2 id="排序检索数据"><a href="#排序检索数据" class="headerlink" title="排序检索数据"></a>排序检索数据</h2><p>按多个列排序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,prod_price,prod_name <span class="keyword">FROM</span> products <span class="keyword">order</span> <span class="keyword">by</span> prod_price,prod_name;</span><br></pre></td></tr></table></figure>
+<p>按列位置排序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,prod_price,prod_name <span class="keyword">FROM</span> products <span class="keyword">order</span> <span class="keyword">by</span> <span class="number">2</span>,<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>指定排序方向,DESC 关键字只应用到位于其前面的列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,prod_price,prod_name <span class="keyword">FROM</span> products <span class="keyword">order</span> <span class="keyword">by</span> prod_price <span class="keyword">DESC</span>,prod_name;</span><br></pre></td></tr></table></figure>
+<h2 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,prod_price,prod_name <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> prod_price = <span class="number">3.49</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,prod_price,prod_name <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> prod_price <span class="keyword">BETWEEN</span> <span class="number">3</span> <span class="keyword">AND</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>不匹配检查 != 或者 &lt;&gt;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,prod_price,prod_name <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> vend_id&lt;&gt;<span class="string">'DLL01'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name <span class="keyword">from</span> Customers <span class="keyword">where</span> cust_email <span class="keyword">is</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name,prod_price <span class="keyword">from</span> products <span class="keyword">where</span> vend_id=<span class="string">'DLL01'</span> <span class="keyword">or</span> vend_id=<span class="string">'BRS01'</span> <span class="keyword">and</span> prod_price&gt;=<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name,prod_price,vend_id <span class="keyword">from</span> products <span class="keyword">where</span> prod_price&gt;=<span class="number">10</span> <span class="keyword">AND</span> vend_id=<span class="string">'DLL01'</span> <span class="keyword">or</span> vend_id=<span class="string">'BRS01'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name,prod_price,vend_id <span class="keyword">from</span> Products <span class="keyword">where</span> vend_id <span class="keyword">In</span> (<span class="string">'DLL01'</span>,<span class="string">'BRS01'</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name,prod_price,vend_id <span class="keyword">from</span> Products <span class="keyword">where</span> <span class="keyword">not</span> vend_id=<span class="string">'DLL01'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+<p>使用通配符进行过滤</p>
+<p>查询以F开头，y结尾的字符</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name <span class="keyword">like</span> <span class="string">'F%y'</span>;</span><br></pre></td></tr></table></figure>
+<p>下划线_匹配单个字符</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name,prod_price,vend_id <span class="keyword">from</span> Products <span class="keyword">where</span> prod_name <span class="keyword">like</span> <span class="string">'_ inch teddy bear'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="创建计算字段"><a href="#创建计算字段" class="headerlink" title="创建计算字段"></a>创建计算字段</h2><p>拼接字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(<span class="keyword">RTRIM</span>(vend_name),<span class="string">'('</span>,<span class="keyword">RTRIM</span>(vend_country),<span class="string">')'</span>) <span class="keyword">from</span> vendors <span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name</span><br></pre></td></tr></table></figure>
+<p>执行算数计算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id,quantity,item_price,quantity*item_price <span class="keyword">AS</span> expanded_price <span class="keyword">from</span> OrderItems <span class="keyword">where</span> order_num=<span class="number">20008</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="使用函数处理数据"><a href="#使用函数处理数据" class="headerlink" title="使用函数处理数据"></a>使用函数处理数据</h2><p>大多数 sql 支持一下类型的函数：</p>
+<ul>
+<li>用于处理文本字符串(如删除或填充值，转换值为大写或小写)的文本函数</li>
+<li>用于在数值数据上进行算数操作（如返回绝对值，进行代数运算）的数值函数</li>
+<li>用于处理日期和时间值并从这些值中提取特定成分的日期和时间函数</li>
+</ul>
+<p>常用的文本处理函数如 LEFT() LENGTH() LOWER() LTRIM() RIGHT():返回字符串右边的字符 UPPER() RTRIM() SOUNDEX()</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name,cust_contact <span class="keyword">from</span> Customers <span class="keyword">where</span> <span class="keyword">SOUNDEX</span>(cust_contact) = <span class="keyword">SOUNDEX</span>(<span class="string">'Michael Green'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="日期和时间处理函数"><a href="#日期和时间处理函数" class="headerlink" title="日期和时间处理函数"></a>日期和时间处理函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> order_num <span class="keyword">from</span> orders <span class="keyword">where</span> <span class="keyword">YEAR</span>(order_date) = <span class="number">2012</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="汇总数据"><a href="#汇总数据" class="headerlink" title="汇总数据"></a>汇总数据</h2><h3 id="聚集函数-AVG-COUNT-MAX-MIN-SUM"><a href="#聚集函数-AVG-COUNT-MAX-MIN-SUM" class="headerlink" title="聚集函数 AVG() COUNT() MAX() MIN() SUM()"></a>聚集函数 AVG() COUNT() MAX() MIN() SUM()</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">AVG</span>(prod_price) <span class="keyword">as</span> avg_price <span class="keyword">from</span> Products;</span><br></pre></td></tr></table></figure>
+<p>使用 count(*) 对表中行的数目进行行计数，不管表列中包含的是空值还是非空值,同 count(1)<br>使用 count(列名) 对特定列中具有值的行进行行计数，忽略NULL值</p>
+<p>MAX()一般用来找出最大的数值或日期，但许多 DBMS 允许将它用来返回任意列中的最大值，包括返回文本列中的最大值，在用于文本数据时，MAX() 返回按该列排序后的最后一行，MIN()同理</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">MAX</span>(prod_name) <span class="keyword">from</span> products;</span><br></pre></td></tr></table></figure>
+<h4 id="聚集不同值"><a href="#聚集不同值" class="headerlink" title="聚集不同值"></a>聚集不同值</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">AVG</span>(<span class="keyword">DISTINCT</span> prod_price) <span class="keyword">AS</span> avg_price <span class="keyword">from</span> Products <span class="keyword">where</span> vend_id=<span class="string">'DLL01'</span> ;</span><br></pre></td></tr></table></figure>
+<h3 id="组合聚集函数"><a href="#组合聚集函数" class="headerlink" title="组合聚集函数"></a>组合聚集函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">as</span> num_items,<span class="keyword">MIN</span>(prod_price) <span class="keyword">as</span> price_min,<span class="keyword">MAX</span>(prod_price) <span class="keyword">as</span> price_max, <span class="keyword">AVG</span>(prod_price) <span class="keyword">as</span> price_avg <span class="keyword">from</span> Products;</span><br></pre></td></tr></table></figure>
+<h2 id="分组数据"><a href="#分组数据" class="headerlink" title="分组数据"></a>分组数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_id,<span class="keyword">count</span>(*) <span class="keyword">as</span> num_prods <span class="keyword">from</span> Products <span class="keyword">group</span> <span class="keyword">by</span> vend_id;</span><br></pre></td></tr></table></figure>
+<h3 id="过滤分组"><a href="#过滤分组" class="headerlink" title="过滤分组"></a>过滤分组</h3><p>Having 非常类似与 where，事实上，几乎所有类型的where子句都可以用having来替代，唯一的差别是，where过滤行，而having过滤分组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_id,<span class="keyword">count</span>(*) <span class="keyword">as</span> orders <span class="keyword">from</span> orders <span class="keyword">group</span> <span class="keyword">by</span> cust_id <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt;=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="使用子查询"><a href="#使用子查询" class="headerlink" title="使用子查询"></a>使用子查询</h2><p>作为子查询的select语句只能查询单个列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_name,cust_contact <span class="keyword">from</span> Customers <span class="keyword">where</span> cust_id <span class="keyword">in</span> (</span><br><span class="line">       								<span class="keyword">select</span> cust_id <span class="keyword">from</span> orders <span class="keyword">where</span> order_num <span class="keyword">in</span> (</span><br><span class="line"> 													<span class="keyword">select</span> order_num <span class="keyword">from</span> orderItems <span class="keyword">where</span> prod_id=<span class="string">'RGAN01'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="创建高级联结"><a href="#创建高级联结" class="headerlink" title="创建高级联结"></a>创建高级联结</h2><p>外联结：包含了相关表中没有关联行的行，这种连结称为外联结<br>在使用 OUTER JOIN 语法时，必须使用right或是left关键字指定包括其所有行的表<br>左外连结和右外连结的唯一差别就是所关联的表的顺序。换句话说，调整from或where子句中表的顺序，左外连结可以转换为右外连结</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.cust_id,orders.order_num <span class="keyword">from</span> customers <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.cust_id=orders.cust_id</span><br></pre></td></tr></table></figure>
+<p>内连结</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.cust_id,orders.order_num <span class="keyword">from</span> customers <span class="keyword">INNER</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.cust_id=orders.cust_id</span><br></pre></td></tr></table></figure>
+<h2 id="组合查询"><a href="#组合查询" class="headerlink" title="组合查询"></a>组合查询</h2><p>有多条 select 语句的查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_name,cust_contact,cust_email <span class="keyword">from</span> customers <span class="keyword">where</span> cust_state <span class="keyword">in</span> (<span class="string">'IL'</span>,<span class="string">'IN'</span>,<span class="string">'MI'</span>) <span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">select</span> cust_name,cust_contact,cust_email <span class="keyword">from</span> customers <span class="keyword">where</span> cust_name = <span class="string">'Fun4All'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p>插入检索出的行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> customers(cust_id,cust_contact,cust_email,cust_address) <span class="keyword">select</span> cust_id,cust_contact,cust_email,cust_address <span class="keyword">from</span> custnew;</span><br></pre></td></tr></table></figure>
+<p>从一个表复制到另一个表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> custcopy <span class="keyword">select</span> * <span class="keyword">from</span> customers</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> custcopy <span class="keyword">as</span> <span class="keyword">select</span> * <span class="keyword">from</span> customers;</span><br></pre></td></tr></table></figure>
+<h2 id="更新和删除数据"><a href="#更新和删除数据" class="headerlink" title="更新和删除数据"></a>更新和删除数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> customers <span class="keyword">set</span> cust_email = <span class="string">'yangyang55@outlook.com'</span> <span class="keyword">where</span> cust_id=<span class="string">'1000000005'</span>;</span><br></pre></td></tr></table></figure>
+<p>删除数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> customers <span class="keyword">where</span> cust_id=<span class="string">'1000000006'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="更快的删除"><a href="#更快的删除" class="headerlink" title="更快的删除"></a>更快的删除</h3><p>如果想从表中删除所有行，不要使用delete，可使用truncate table 语句，它完成相同的工作，而速度更快</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> custcopy;</span><br></pre></td></tr></table></figure>
+<h2 id="sql数据类型"><a href="#sql数据类型" class="headerlink" title="sql数据类型"></a>sql数据类型</h2><h3 id="字符串数据类型"><a href="#字符串数据类型" class="headerlink" title="字符串数据类型"></a>字符串数据类型</h3><p>定长字符串接受固定长度的字符串，其长度是在创建表时指定的。<br>变长字符串存储任意长度的文本。<br>既然变长数据类型这样灵活，为什么还要用定长数据类型？答案是性能，DMMS 处理定长列远比处理变长列快得多，此外，许多DBMS不允许对变长列进行索引，这也会极大的影响性能。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHAR</td>
+<td style="text-align:left">1~255个字符的定长字符串，长度必须在创建时规定</td>
+</tr>
+<tr>
+<td>NCHAR</td>
+<td style="text-align:left">CHAR的特殊形式，用来支持多字节或是Unicode字符</td>
+</tr>
+<tr>
+<td>NVARCHAR</td>
+<td style="text-align:left">TEXT的特殊形式，用来支持多字节或Unicode字符</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td style="text-align:left">变长文本</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIT</td>
+<td style="text-align:left">单个二进制位，或者为0或者为1，主要用于开关标志</td>
+</tr>
+<tr>
+<td>DECIMAL(或NUMERIC)</td>
+<td style="text-align:left">定点或精度可变的浮点型</td>
+</tr>
+<tr>
+<td>FLOAT(NUMBER)</td>
+<td style="text-align:left">浮点型</td>
+</tr>
+<tr>
+<td>INT(或INTEGER)</td>
+<td style="text-align:left">四字节整数值</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td style="text-align:left">四字节浮点型</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td style="text-align:left">二字节整数值</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td style="text-align:left">一字节整数值</td>
+</tr>
+</tbody>
+</table>
+<p>多数DBMS支持一种用来存储货币值的特殊数值数据类型，一般记为MONEY 或者 CURRENCY。这些数据类型基本上时有特定取值范围的DECIMAL数据类型</p>
+<h3 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATE</td>
+<td style="text-align:left">日期值</td>
+</tr>
+<tr>
+<td>DATETIME(或TIMESTAMP)</td>
+<td style="text-align:left">日期时间值</td>
+</tr>
+<tr>
+<td>SMALLDATETIME</td>
+<td style="text-align:left">日期时间值，精确到分，无秒或毫秒</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td style="text-align:left">时间值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二进制数据类型"><a href="#二进制数据类型" class="headerlink" title="二进制数据类型"></a>二进制数据类型</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BINARY</td>
+<td style="text-align:left">定长二进制数据</td>
+</tr>
+<tr>
+<td>LONG RAW</td>
+<td style="text-align:left">变长二进制数据，最长2GB</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/06/mongodb-学习笔记/" rel="next" title="mongodb 学习笔记">
+                <i class="fa fa-chevron-left"></i> mongodb 学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/25/Mysql学习笔记/" rel="prev" title="Mysql学习笔记">
+                Mysql学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="FrouFrou">
+            
+              <p class="site-author-name" itemprop="name">FrouFrou</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#检索数据"><span class="nav-number">1.</span> <span class="nav-text">检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检索不同的值"><span class="nav-number">1.1.</span> <span class="nav-text">检索不同的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限制结果"><span class="nav-number">1.2.</span> <span class="nav-text">限制结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序检索数据"><span class="nav-number">2.</span> <span class="nav-text">排序检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤数据"><span class="nav-number">3.</span> <span class="nav-text">过滤数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建计算字段"><span class="nav-number">4.</span> <span class="nav-text">创建计算字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用函数处理数据"><span class="nav-number">5.</span> <span class="nav-text">使用函数处理数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间处理函数"><span class="nav-number">5.1.</span> <span class="nav-text">日期和时间处理函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汇总数据"><span class="nav-number">6.</span> <span class="nav-text">汇总数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集函数-AVG-COUNT-MAX-MIN-SUM"><span class="nav-number">6.1.</span> <span class="nav-text">聚集函数 AVG() COUNT() MAX() MIN() SUM()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#聚集不同值"><span class="nav-number">6.1.1.</span> <span class="nav-text">聚集不同值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合聚集函数"><span class="nav-number">6.2.</span> <span class="nav-text">组合聚集函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组数据"><span class="nav-number">7.</span> <span class="nav-text">分组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤分组"><span class="nav-number">7.1.</span> <span class="nav-text">过滤分组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用子查询"><span class="nav-number">8.</span> <span class="nav-text">使用子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建高级联结"><span class="nav-number">9.</span> <span class="nav-text">创建高级联结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合查询"><span class="nav-number">10.</span> <span class="nav-text">组合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入数据"><span class="nav-number">11.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新和删除数据"><span class="nav-number">12.</span> <span class="nav-text">更新和删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更快的删除"><span class="nav-number">12.1.</span> <span class="nav-text">更快的删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql数据类型"><span class="nav-number">13.</span> <span class="nav-text">sql数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串数据类型"><span class="nav-number">13.1.</span> <span class="nav-text">字符串数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值数据类型"><span class="nav-number">13.2.</span> <span class="nav-text">数值数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间数据类型"><span class="nav-number">13.3.</span> <span class="nav-text">日期和时间数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制数据类型"><span class="nav-number">13.4.</span> <span class="nav-text">二进制数据类型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FrouFrou</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
